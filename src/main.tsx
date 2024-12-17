@@ -2,10 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 // import './index.css'
 import "bootstrap/dist/css/bootstrap.css";
-import App from "./App.tsx";
-import { BrowserRouter, createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router-dom";
-import Home from "./components/Home";
 import { Global } from "./Util/Global";
 import Department from "./Department/Department";
 import CreateFaculty from "./Faculty/CreateFaculty";

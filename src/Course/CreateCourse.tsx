@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Course.css";
 import Button from "../components/Button";
 import { Global } from "../Util/Global";
-import { FacultyType } from "../Entities/Faculty.type";
-import { DepartmentType } from "../Entities/Department.type";
 import Input from "../components/Input";
-import MultiInput from "../components/MultiInput";
 import FacultySelect from "../Faculty/FacultySelect";
 import DepartmentSelect from "../Department/DepartmentSelect";
 import MultiInputCard from "../components/MultiInputCard";

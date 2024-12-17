@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router";
 import { api } from "../Util/api";
 
 const Faculty = () => {
   const [faculties, setFaculties] = useState([]);
-  const [error, setStateError] = useState({});
+  // const [error, setStateError] = useState({});
 
-  const [facultyName, setFacultyName] = useState("");
+  // const [facultyName, setFacultyName] = useState("");
 
   let navitate = useNavigate();
 
@@ -22,7 +22,7 @@ const Faculty = () => {
       .then((response) => setFaculties(response))
       .catch((error) => {
         console.log(error);
-        setStateError(error);
+        // setStateError(error);
       });
   }, []);
 
@@ -36,7 +36,7 @@ const Faculty = () => {
               key={faculty.id}
               onClick={() => {
                 console.log(faculty.name);
-                setFacultyName(faculty.name);
+                // setFacultyName(faculty.name);
                 navitate("department", { state: faculty.name });
               }}
             >

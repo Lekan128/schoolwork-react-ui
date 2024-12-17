@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Global } from "../Util/Global";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Loader from "../components/Loader";
 import { DepartmentType } from "../Entities/Department.type";
 
@@ -9,7 +9,7 @@ const Department = () => {
   let navigate = useNavigate();
 
   const [Departments, setDepartments] = useState([]);
-  const [error, setStateError] = useState({});
+  // const [error, setStateError] = useState({});
 
   let facultyName = location.state;
 
@@ -21,7 +21,7 @@ const Department = () => {
       .then((response) => setDepartments(response))
       .catch((err) => {
         console.log(err);
-        setStateError(err);
+        // setStateError(err);
       });
   }, []);
 

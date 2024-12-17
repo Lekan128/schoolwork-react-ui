@@ -10,13 +10,12 @@ const Course = () => {
   let navigate = useNavigate();
 
   const [courses, setCourses] = useState([]);
-  const [error, setStateError] = useState({});
+  // const [error, setStateError] = useState({});
 
   console.log(location.state);
   console.log("course: " + location.state.facultyName);
   console.log("course: " + location.state);
 
-  const facunltyName = location.state.facultyName;
   const departmentId = location.state.departmentId;
   const departmentName = location.state.departmentName;
 
@@ -27,7 +26,7 @@ const Course = () => {
       .then((response) => setCourses(response))
       .catch((err) => {
         console.log(err);
-        setStateError(err);
+        // setStateError(err);
       });
   }, []);
 

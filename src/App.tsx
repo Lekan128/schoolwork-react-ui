@@ -1,10 +1,10 @@
-import { useState } from "react";
-import Message from "./Message";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
-import ListGroup from "./components/ListGroup";
+// import { useState } from "react";
+// import Message from "./Message";
+// import Alert from "./components/Alert";
+// import Button from "./components/Button";
+// import ListGroup from "./components/ListGroup";
 import Faculty from "./Faculty/Faculty";
-import { Outlet, Route, RouterProvider, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import Home from "./components/Home";
 import { Global } from "./Util/Global";
 import Department from "./Department/Department";

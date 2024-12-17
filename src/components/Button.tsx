@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   children: String;
   colour?: "primary" | "secondary" | "success"; //optional property, it only takes one of those 3 inputs

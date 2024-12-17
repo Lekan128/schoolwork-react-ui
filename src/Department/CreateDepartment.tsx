@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../components/Button";
 import "../App.css";
-import Input from "../components/Input";
 import { Global } from "../Util/Global";
-import { FacultyType } from "../Entities/Faculty.type";
 import FacultySelect from "../Faculty/FacultySelect";
 import MultiInput from "../components/MultiInput";
 import { useNavigate } from "react-router-dom";

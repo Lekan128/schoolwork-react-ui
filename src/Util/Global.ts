@@ -1,6 +1,7 @@
 export class Global{
 
     static base_url = import.meta.env.VITE_REACT_APP_BASE_URL;
+    // static base_url = "http://localhost:8080";
     static faculty = "/faculty";
     static department = "/department";
     static course = "/course";

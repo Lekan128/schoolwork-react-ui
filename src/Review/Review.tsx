@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import { Global } from "../Util/Global";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { ReviewType } from "../Entities/Review.type";
 import ReviewCard from "./ReviewCard";
 
@@ -14,9 +14,7 @@ export const Review = () => {
   console.log(Global.base_url + Global.review + "/" + courseId);
 
   const [reviews, setReviews] = useState([]);
-  const [error, setStateError] = useState({});
-
-  let navitate = useNavigate();
+  //   const [error, setStateError] = useState({});
 
   useEffect(() => {
     fetch(Global.base_url + Global.review + "/" + courseId)
@@ -24,7 +22,7 @@ export const Review = () => {
       .then((response) => setReviews(response))
       .catch((error) => {
         console.log(error);
-        setStateError(error);
+        // setStateError(error);
       });
   }, []);
 

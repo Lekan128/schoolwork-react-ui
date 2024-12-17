@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Global } from "../Util/Global";
 import { FacultyType } from "../Entities/Faculty.type";
 import { api } from "../Util/api";
 
