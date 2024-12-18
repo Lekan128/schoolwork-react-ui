@@ -1,5 +1,9 @@
-const Loader = () => {
-  return <div>Loading ...</div>;
+interface Props {
+  errorMessage?: string;
+}
+
+const Loader = ({ errorMessage = "" }: Props) => {
+  return <div>{errorMessage ? errorMessage : "Loading ..."}</div>;
 };
 
 export default Loader;

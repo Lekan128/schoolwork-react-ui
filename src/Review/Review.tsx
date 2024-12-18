@@ -4,6 +4,8 @@ import { Global } from "../Util/Global";
 import { useParams } from "react-router";
 import { ReviewType } from "../Entities/Review.type";
 import ReviewCard from "./ReviewCard";
+import NotificationPopup from "../components/NotificationPopup";
+import { NotificationType } from "../Entities/Notification.type";
 
 export const Review = () => {
   const params = useParams();
@@ -14,7 +16,10 @@ export const Review = () => {
   console.log(Global.base_url + Global.review + "/" + courseId);
 
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  //   const [error, setStateError] = useState({});
+  const [unableToLoadError, setUnableToLoadError] = useState("");
+  const [notification, setNotification] = useState("");
+  const [notificationType, setNotificationType] =
+    useState<NotificationType>("primary");
 
   useEffect(() => {
     fetch(Global.base_url + Global.review + "/" + courseId)
@@ -22,13 +27,31 @@ export const Review = () => {
       .then((response: ReviewType[]) => {
         if (response.length > 0) {
           setReviews(response);
+          return;
         }
+        const error = "No Review availabe to load";
+        handleSetNotificaton(error);
+        setUnableToLoadError(error);
       })
       .catch((error) => {
         console.log(error);
-        // setStateError(error);
+        handleSetNotificaton("An error occoured: " + error, "danger");
       });
   }, []);
+
+  const handleSetNotificaton = (
+    notification: string,
+    notificationType: NotificationType = "primary"
+  ) => {
+    setNotification(notification);
+    setNotificationType(notificationType);
+  };
+
+  const handleClearNotification = () => {
+    console.log("Suppose clear am na");
+    setNotification("");
+    setNotificationType("primary");
+  };
 
   return (
     <div>
@@ -41,7 +64,14 @@ export const Review = () => {
           ))
         ) : (
           //else
-          <Loader />
+          <Loader errorMessage={unableToLoadError} />
+        )}
+        {notification && (
+          <NotificationPopup
+            message={notification}
+            type={notificationType}
+            onClose={() => handleClearNotification()}
+          />
         )}
       </ul>
     </div>

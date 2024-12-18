@@ -45,6 +45,13 @@ const CreateReview = () => {
     setSelectedCourseId(selectedId);
   };
 
+  const handleOnReviewTextChange = (review: string) => {
+    if (review.length > 1000) {
+      console.log("error");
+    }
+    setReview(review);
+  };
+
   const handleSave = () => {
     if (
       lecturer === "" ||
@@ -105,7 +112,7 @@ const CreateReview = () => {
         header="Review :"
         placeholder="Input review here"
         rows={4}
-        onTextChange={setReview}
+        onTextChange={handleOnReviewTextChange}
       />
       <MultiLineInput
         header="Test Tips :"
