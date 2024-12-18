@@ -9,9 +9,15 @@ import MultiInputCard from "../components/MultiInputCard";
 import Selector from "../components/Selector";
 import LevelSelect from "../Level/LevelSelect";
 import { useNavigate } from "react-router-dom";
+import { NotificationType } from "../Entities/Notification.type";
+import NotificationPopup from "../components/NotificationPopup";
 
 const CreateCourse = () => {
   let navitate = useNavigate();
+
+  const [notification, setNotification] = useState("");
+  const [notificationType, setNotificationType] =
+    useState<NotificationType>("primary");
 
   const [facultyName, setFacultyName] = useState("");
 
@@ -58,9 +64,12 @@ const CreateCourse = () => {
       level === ""
     ) {
       console.log("Fill up fields");
+      handleSetNotificaton("Fill up all fields");
       return;
       //alert user
     }
+
+    handleSetNotificaton("Loading...");
 
     //do checks before save
 
@@ -74,8 +83,22 @@ const CreateCourse = () => {
         navitate(Global.create);
       })
       .catch((error) => {
+        handleSetNotificaton("An error occoured: " + error, "danger");
         console.log(error);
       });
+  };
+
+  const handleSetNotificaton = (
+    notification: string,
+    notificationType: NotificationType = "primary"
+  ) => {
+    setNotification(notification);
+    setNotificationType(notificationType);
+  };
+
+  const handleClearNotification = () => {
+    setNotification("");
+    setNotificationType("primary");
   };
 
   return (
@@ -115,6 +138,15 @@ const CreateCourse = () => {
       />
 
       <Button onClick={handleSave}>Save</Button>
+
+      {/* notification */}
+      {notification && (
+        <NotificationPopup
+          message={notification}
+          type={notificationType}
+          onClose={() => handleClearNotification()}
+        />
+      )}
     </>
   );
 };

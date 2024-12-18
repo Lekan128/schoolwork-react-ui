@@ -7,9 +7,15 @@ import DepartmentSelect from "../Department/DepartmentSelect";
 import { useNavigate } from "react-router-dom";
 import CourseSelect from "../Course/CourseSelect";
 import MultiLineInput from "../components/MultiLineInput";
+import { NotificationType } from "../Entities/Notification.type";
+import NotificationPopup from "../components/NotificationPopup";
 
 const CreateReview = () => {
   let navitate = useNavigate();
+
+  const [notification, setNotification] = useState("");
+  const [notificationType, setNotificationType] =
+    useState<NotificationType>("primary");
 
   const [facultyName, setFacultyName] = useState("");
 
@@ -61,9 +67,11 @@ const CreateReview = () => {
       examTips === ""
     ) {
       console.log("Fill up fields");
+      handleSetNotificaton("Fill up all fields");
       return;
       //alert user
     }
+    handleSetNotificaton("Loading...");
 
     const dto = {
       lecturer: lecturer,
@@ -83,8 +91,22 @@ const CreateReview = () => {
         navitate(Global.create);
       })
       .catch((error) => {
+        handleSetNotificaton("An error occoured: " + error, "danger");
         console.log(error);
       });
+  };
+
+  const handleSetNotificaton = (
+    notification: string,
+    notificationType: NotificationType = "primary"
+  ) => {
+    setNotification(notification);
+    setNotificationType(notificationType);
+  };
+
+  const handleClearNotification = () => {
+    setNotification("");
+    setNotificationType("primary");
   };
 
   return (
@@ -128,6 +150,15 @@ const CreateReview = () => {
       />
 
       <Button onClick={handleSave}>Save</Button>
+
+      {/* notification */}
+      {notification && (
+        <NotificationPopup
+          message={notification}
+          type={notificationType}
+          onClose={() => handleClearNotification()}
+        />
+      )}
     </>
   );
 };
