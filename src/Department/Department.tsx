@@ -3,13 +3,18 @@ import { Global } from "../Util/Global";
 import { useLocation, useNavigate } from "react-router";
 import Loader from "../components/Loader";
 import { DepartmentType } from "../Entities/Department.type";
+import { NotificationType } from "../Entities/Notification.type";
+import NotificationPopup from "../components/NotificationPopup";
 
 const Department = () => {
   const location = useLocation();
   let navigate = useNavigate();
 
+  const [unableToLoadError, setUnableToLoadError] = useState("");
   const [Departments, setDepartments] = useState([]);
-  // const [error, setStateError] = useState({});
+  const [notification, setNotification] = useState("");
+  const [notificationType, setNotificationType] =
+    useState<NotificationType>("primary");
 
   let facultyName = location.state;
 
@@ -18,12 +23,35 @@ const Department = () => {
   useEffect(() => {
     fetch(Global.base_url + Global.department + "/" + facultyName)
       .then((response) => response.json())
-      .then((response) => setDepartments(response))
+      .then((response) => {
+        if (response.length === 0) {
+          const error = "No Department availabe to load";
+          handleSetNotificaton(error);
+          setUnableToLoadError(error);
+          return;
+        }
+        setDepartments(response);
+      })
       .catch((err) => {
         console.log(err);
         // setStateError(err);
+        handleSetNotificaton("An error occoured: " + err, "danger");
       });
   }, []);
+
+  const handleSetNotificaton = (
+    notification: string,
+    notificationType: NotificationType = "primary"
+  ) => {
+    setNotification(notification);
+    setNotificationType(notificationType);
+  };
+
+  const handleClearNotification = () => {
+    console.log("Suppose clear am na");
+    setNotification("");
+    setNotificationType("primary");
+  };
 
   const handleOnItemSelected = (
     departmentId: string,
@@ -39,15 +67,6 @@ const Department = () => {
         departmentId,
       },
     });
-
-    // console.log(
-    //   "It is time to go from deparemt: " +
-    //     departmentId +
-    //     " \n with name: " +
-    //     departmentName +
-    //     "\n faculty: " +
-    //     facultyName
-    // );
   };
 
   return (
@@ -73,9 +92,16 @@ const Department = () => {
           ))
         ) : (
           //else
-          <Loader />
+          <Loader errorMessage={unableToLoadError} />
         )}
       </ul>
+      {notification && (
+        <NotificationPopup
+          message={notification}
+          type={notificationType}
+          onClose={() => handleClearNotification()}
+        />
+      )}
     </div>
   );
 };
