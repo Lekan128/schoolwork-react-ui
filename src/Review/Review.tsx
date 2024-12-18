@@ -13,13 +13,17 @@ export const Review = () => {
 
   console.log(Global.base_url + Global.review + "/" + courseId);
 
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
   //   const [error, setStateError] = useState({});
 
   useEffect(() => {
     fetch(Global.base_url + Global.review + "/" + courseId)
       .then((response) => response.json())
-      .then((response) => setReviews(response))
+      .then((response: ReviewType[]) => {
+        if (response.length > 0) {
+          setReviews(response);
+        }
+      })
       .catch((error) => {
         console.log(error);
         // setStateError(error);
