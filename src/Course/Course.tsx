@@ -6,6 +6,7 @@ import { CourseType } from "../Entities/Course.type";
 import "../App.css";
 import { NotificationType } from "../Entities/Notification.type";
 import NotificationPopup from "../components/NotificationPopup";
+import { api } from "../Util/api";
 
 const Course = () => {
   const location = useLocation();
@@ -21,8 +22,10 @@ const Course = () => {
   const departmentName = location.state.departmentName;
 
   useEffect(() => {
-    console.log(Global.base_url + Global.course + "/" + departmentId);
-    fetch(Global.base_url + Global.course + "/" + departmentId)
+    const getCourseByDepartment = api.coursesByDepartment(departmentId);
+    console.log(getCourseByDepartment);
+
+    fetch(getCourseByDepartment)
       .then((response) => response.json())
       .then((response) => {
         if (response.length === 0) {
