@@ -138,6 +138,9 @@ const CreateCourse = () => {
       />
 
       {/* <Input tag="Semester" placeHolder="semester" onTextInput={setSemester} /> */}
+      <label htmlFor="semester" className="form-label">
+        Semester
+      </label>
       <Selector
         handleSelectChange={(event) => setSemester(event.target.value)}
         items={Global.semesters}

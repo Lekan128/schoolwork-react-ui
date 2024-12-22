@@ -3,20 +3,22 @@ import { CourseMaterialType } from "../Entities/CourseMaterial.type";
 
 interface CourseMaterialInputProps {
   tag?: string;
-  placeHolder1: string;
-  placeHolder2: string;
+  placeHolder1?: string;
+  placeHolder2?: string;
   onListChange: (list: CourseMaterialType[]) => void;
+  preloadedCourseMaterials?: CourseMaterialType[];
 }
 
 const CourseMaterialInput = ({
   tag = ">",
-  placeHolder1,
-  placeHolder2,
+  placeHolder1 = "name",
+  placeHolder2 = "link",
   onListChange,
+  preloadedCourseMaterials = [{ name: "", link: "" }],
 }: CourseMaterialInputProps) => {
-  const [items, setItems] = useState<CourseMaterialType[]>([
-    { name: "", link: "" },
-  ]);
+  const [items, setItems] = useState<CourseMaterialType[]>(
+    preloadedCourseMaterials
+  );
 
   const handleInputChange = (
     index: number,

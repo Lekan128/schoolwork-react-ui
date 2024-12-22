@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 interface Props {
   tag?: string;
   placeHolder: string;
   onTextInput: (input: string) => void;
   maximumLength?: number;
+  initialValue?: string;
 }
 
 const Input = ({
@@ -10,7 +13,15 @@ const Input = ({
   placeHolder,
   onTextInput,
   maximumLength = 0,
+  initialValue = "",
 }: Props) => {
+  const [textValue, setTextValue] = useState(initialValue);
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTextValue(e.target.value);
+    onTextInput(e.target.value);
+  };
+
   return (
     <>
       <div className="input-group mb-3">
@@ -24,7 +35,9 @@ const Input = ({
           aria-label={placeHolder}
           aria-describedby="basic-addon1"
           {...(maximumLength > 0 ? { maxLength: maximumLength } : {})}
-          onChange={(event) => onTextInput(event.target.value)}
+          value={textValue}
+          // {...(initialValue.length > 0 ? { value: initialValue } : {})}
+          onChange={handleTextChange}
         />
       </div>
     </>

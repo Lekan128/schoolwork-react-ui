@@ -5,17 +5,19 @@ import CourseMaterialInput from "./CourseMaterialInput";
 interface Props {
   header?: string;
   tag?: string;
-  placeHolder1: string;
-  placeHolder2: string;
+  placeHolder1?: string;
+  placeHolder2?: string;
   onListChange: (list: CourseMaterialType[]) => void;
+  preloadedCourseMaterials?: CourseMaterialType[];
 }
 
 const CourseMaterialInputCard = ({
   header = "",
   tag = ">",
-  placeHolder1,
-  placeHolder2,
+  placeHolder1 = "name",
+  placeHolder2 = "link",
   onListChange,
+  preloadedCourseMaterials = [{ name: "", link: "" }],
 }: Props) => {
   return (
     <div className="card">
@@ -26,6 +28,7 @@ const CourseMaterialInputCard = ({
           placeHolder1={placeHolder1}
           placeHolder2={placeHolder2}
           onListChange={onListChange}
+          preloadedCourseMaterials={preloadedCourseMaterials}
         />
       </div>
     </div>
