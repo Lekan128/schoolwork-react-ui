@@ -10,7 +10,7 @@ interface Props {
   onListChange: (list: CourseMaterialType[]) => void;
 }
 
-const MultiInputCard = ({
+const CourseMaterialInputCard = ({
   header = "",
   tag = ">",
   placeHolder1,
@@ -32,4 +32,4 @@ const MultiInputCard = ({
   );
 };
 
-export default MultiInputCard;
+export default CourseMaterialInputCard;

@@ -1,3 +1,4 @@
+import { CourseMaterialType } from "./CourseMaterial.type";
 import { DepartmentType } from "./Department.type";
 import { LevelType } from "./Level.type";
 
@@ -6,8 +7,8 @@ export type CourseType = {
   title: string;
   code: string;
   reviews?: [string];
-  materialLinks?: [string];
   semester: string;
   level: LevelType;
   department: DepartmentType;
+  courseMaterials: CourseMaterialType[];
 };
