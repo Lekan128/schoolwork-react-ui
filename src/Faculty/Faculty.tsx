@@ -25,7 +25,6 @@ const Faculty = () => {
         setFaculties(response);
       })
       .catch((error) => {
-        console.log(JSON.stringify(error));
         console.log(error);
         handleSetNotificaton("An error occoured: " + error, "danger");
       });
@@ -40,7 +39,6 @@ const Faculty = () => {
   };
 
   const handleClearNotification = () => {
-    console.log("Suppose clear am na");
     setNotification("");
     setNotificationType("primary");
   };
