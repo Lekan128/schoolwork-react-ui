@@ -138,7 +138,18 @@ const ViewCourse = () => {
       )}
 
       <br />
+
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => navigate(Global.review + "/" + courseId)}
+      >
+        Check Reviews
+      </button>
+
       <br />
+      <br />
+
       <button
         type="button"
         className="btn btn-outline-secondary"

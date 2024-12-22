@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import SearchCourse from "../Course/SearchCourse";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -29,6 +30,13 @@ const HomePage = () => {
       >
         Go to Faculties
       </button>
+
+      <br />
+      <br />
+      <br />
+      <div className="card">
+        <SearchCourse />
+      </div>
 
       {/* Hidden or less obvious "Create" option */}
       <div

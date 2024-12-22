@@ -78,7 +78,6 @@ const UpdateCourse = () => {
         return response.json();
       })
       .then(() => {
-        alert("Course updated successfully!");
         navigate(Global.view + Global.course + "/" + courseId); // Redirect to the course details page
       })
       .catch((err) => {

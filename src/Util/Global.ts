@@ -12,6 +12,7 @@ export class Global{
     static create = "/create";
     static view = "/view";
     static update = "/update";
+    static search = "/search";
 
 
     static paramCourseId = "/:courseId";
