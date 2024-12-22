@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CourseType } from "../Entities/Course.type";
 import { api } from "../Util/api";
 import { NotificationType } from "../Entities/Notification.type";
 import NotificationPopup from "../components/NotificationPopup";
 import Loader from "../components/Loader";
+import { Global } from "../Util/Global";
 
 const ViewCourse = () => {
+  const navigate = useNavigate();
+
   const { courseId } = useParams<{ courseId: string }>(); // Get the course ID from the route
   const [course, setCourse] = useState<CourseType | null>(null);
   const [loading, setLoading] = useState(true);
@@ -133,6 +136,16 @@ const ViewCourse = () => {
       ) : (
         <p>No course materials available.</p>
       )}
+
+      <br />
+      <br />
+      <button
+        type="button"
+        className="btn btn-outline-secondary"
+        onClick={() => navigate(Global.update + Global.course + "/" + courseId)}
+      >
+        Edit
+      </button>
 
       {notification.length > 0 && (
         <NotificationPopup
