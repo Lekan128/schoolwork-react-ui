@@ -40,9 +40,6 @@ const SearchCourse = () => {
     if (semester) params.append("semester", semester);
     if (level) params.append("levelId", level);
 
-    console.log(api.courses() + "?" + params.toString());
-    console.log(params);
-
     fetch(api.courses() + "?" + params.toString())
       .then((response) => {
         if (!response.ok) {
