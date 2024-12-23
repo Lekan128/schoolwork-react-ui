@@ -72,8 +72,6 @@ const UpdateCourse = () => {
     };
     const urlGetCourseById = api.coursesById(courseId!);
 
-    console.log(updatedCourse);
-    console.log(urlGetCourseById);
     fetch(urlGetCourseById, {
       method: "PUT",
       headers: { "Content-Type": "application/json", NAME: passName },

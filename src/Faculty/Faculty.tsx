@@ -52,8 +52,6 @@ const Faculty = () => {
               className="list-group-item"
               key={faculty.id}
               onClick={() => {
-                console.log(faculty.name);
-                // setFacultyName(faculty.name);
                 navitate("department", { state: faculty.name });
               }}
             >

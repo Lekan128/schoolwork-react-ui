@@ -23,7 +23,6 @@ const Course = () => {
 
   useEffect(() => {
     const getCourseByDepartment = api.coursesByDepartment(departmentId);
-    console.log(getCourseByDepartment);
 
     fetch(getCourseByDepartment)
       .then((response) => response.json())

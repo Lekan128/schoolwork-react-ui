@@ -68,7 +68,6 @@ const CreateCourse = () => {
       semester === "" ||
       level === ""
     ) {
-      console.log("Fill up fields");
       handleSetNotificaton("Fill up all fields");
       return;
       //alert user

@@ -55,7 +55,7 @@ const CreateReview = () => {
 
   const handleOnReviewTextChange = (review: string) => {
     if (review.length > 1000) {
-      console.log("error");
+      handleSetNotificaton("Text too long, wount save", "warning");
     }
     setReview(review);
   };
@@ -68,7 +68,6 @@ const CreateReview = () => {
       testTips === "" ||
       examTips === ""
     ) {
-      console.log("Fill up fields");
       handleSetNotificaton("Fill up all fields");
       return;
       //alert user
