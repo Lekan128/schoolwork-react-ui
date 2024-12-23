@@ -6,6 +6,7 @@ import MultiInput from "../components/MultiInput";
 import { useNavigate } from "react-router-dom";
 import { NotificationType } from "../Entities/Notification.type";
 import NotificationPopup from "../components/NotificationPopup";
+import Input from "../components/Input";
 
 const CreateLevel = () => {
   let navitate = useNavigate();
@@ -15,6 +16,8 @@ const CreateLevel = () => {
     useState<NotificationType>("primary");
 
   const [levels, setLevels] = useState<string[]>([]);
+
+  const [passName, setPassName] = useState("");
 
   const handleSave = () => {
     if (levels.length === 0) {
@@ -26,7 +29,7 @@ const CreateLevel = () => {
 
     fetch(Global.base_url + Global.level, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", NAME: passName },
       body: JSON.stringify(levels),
     })
       .then(() => {
@@ -67,6 +70,7 @@ const CreateLevel = () => {
           onClose={() => handleClearNotification()}
         />
       )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </>
   );
 };

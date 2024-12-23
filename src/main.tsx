@@ -17,6 +17,9 @@ import HomePage from "./components/HomePage.tsx";
 import Create from "./components/Create.tsx";
 import CreateReview from "./Review/CreateReview.tsx";
 import { Review } from "./Review/Review.tsx";
+import ViewCourse from "./Course/ViewCourse.tsx";
+import UpdateCourse from "./Course/UpdateCourse.tsx";
+import SearchCourse from "./Course/SearchCourse.tsx";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +66,18 @@ const router = createBrowserRouter([
   {
     path: Global.create + Global.review,
     element: <CreateReview />,
+  },
+  {
+    path: Global.view + Global.course + Global.paramCourseId,
+    element: <ViewCourse />,
+  },
+  {
+    path: Global.update + Global.course + Global.paramCourseId,
+    element: <UpdateCourse />,
+  },
+  {
+    path: Global.search + Global.course,
+    element: <SearchCourse />,
   },
 ]);
 

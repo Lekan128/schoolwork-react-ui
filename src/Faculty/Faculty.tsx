@@ -25,7 +25,6 @@ const Faculty = () => {
         setFaculties(response);
       })
       .catch((error) => {
-        console.log(JSON.stringify(error));
         console.log(error);
         handleSetNotificaton("An error occoured: " + error, "danger");
       });
@@ -40,7 +39,6 @@ const Faculty = () => {
   };
 
   const handleClearNotification = () => {
-    console.log("Suppose clear am na");
     setNotification("");
     setNotificationType("primary");
   };
@@ -54,8 +52,6 @@ const Faculty = () => {
               className="list-group-item"
               key={faculty.id}
               onClick={() => {
-                console.log(faculty.name);
-                // setFacultyName(faculty.name);
                 navitate("department", { state: faculty.name });
               }}
             >

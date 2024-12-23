@@ -6,6 +6,7 @@ import MultiInput from "../components/MultiInput";
 import { useNavigate } from "react-router-dom";
 import { NotificationType } from "../Entities/Notification.type";
 import NotificationPopup from "../components/NotificationPopup";
+import Input from "../components/Input";
 
 const CreateFaculty = () => {
   let navitate = useNavigate();
@@ -15,6 +16,8 @@ const CreateFaculty = () => {
     useState<NotificationType>("primary");
 
   const [faculties, setfaculties] = useState<string[]>([]);
+
+  const [passName, setPassName] = useState("");
 
   const handleSave = () => {
     if (faculties.length === 0) {
@@ -26,7 +29,7 @@ const CreateFaculty = () => {
 
     fetch(Global.base_url + Global.faculty, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", NAME: passName },
       body: JSON.stringify(faculties),
     })
       .then(() => {
@@ -67,6 +70,7 @@ const CreateFaculty = () => {
           onClose={() => handleClearNotification()}
         />
       )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </>
   );
 };

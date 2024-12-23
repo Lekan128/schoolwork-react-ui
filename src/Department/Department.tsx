@@ -18,8 +18,6 @@ const Department = () => {
 
   let facultyName = location.state;
 
-  console.log("dpt: " + facultyName);
-
   useEffect(() => {
     fetch(Global.base_url + Global.department + "/" + facultyName)
       .then((response) => response.json())
@@ -48,7 +46,6 @@ const Department = () => {
   };
 
   const handleClearNotification = () => {
-    console.log("Suppose clear am na");
     setNotification("");
     setNotificationType("primary");
   };
@@ -58,8 +55,6 @@ const Department = () => {
     departmentName: string,
     facultyName: string
   ) => {
-    console.log(Departments);
-    console.log(departmentId);
     navigate("course", {
       state: {
         facultyName,
@@ -71,7 +66,7 @@ const Department = () => {
 
   return (
     <div>
-      <h1>{"Faculty: " + facultyName}</h1>
+      <h1>{"Departments in faculty: " + facultyName}</h1>
 
       <ul className="list-group">
         {Departments.length > 0 ? ( //if faculty is not empty

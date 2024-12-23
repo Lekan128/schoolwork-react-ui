@@ -27,6 +27,8 @@ const CreateReview = () => {
   const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
   const [selectedCourseId, setSelectedCourseId] = useState("");
 
+  const [passName, setPassName] = useState("");
+
   const selectDptMessage = "Plese select a Department";
   const selectFacultyMessage = "Plese select a Faculty";
 
@@ -53,7 +55,7 @@ const CreateReview = () => {
 
   const handleOnReviewTextChange = (review: string) => {
     if (review.length > 1000) {
-      console.log("error");
+      handleSetNotificaton("Text too long, wount save", "warning");
     }
     setReview(review);
   };
@@ -66,7 +68,6 @@ const CreateReview = () => {
       testTips === "" ||
       examTips === ""
     ) {
-      console.log("Fill up fields");
       handleSetNotificaton("Fill up all fields");
       return;
       //alert user
@@ -83,7 +84,7 @@ const CreateReview = () => {
 
     fetch(Global.base_url + Global.review, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", NAME: passName },
       body: JSON.stringify(dto),
     })
       .then(() => {
@@ -159,6 +160,7 @@ const CreateReview = () => {
           onClose={() => handleClearNotification()}
         />
       )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </>
   );
 };

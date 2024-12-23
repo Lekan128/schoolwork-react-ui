@@ -5,12 +5,13 @@ import { Global } from "../Util/Global";
 import Input from "../components/Input";
 import FacultySelect from "../Faculty/FacultySelect";
 import DepartmentSelect from "../Department/DepartmentSelect";
-import MultiInputCard from "../components/MultiInputCard";
 import Selector from "../components/Selector";
 import LevelSelect from "../Level/LevelSelect";
 import { useNavigate } from "react-router-dom";
 import { NotificationType } from "../Entities/Notification.type";
 import NotificationPopup from "../components/NotificationPopup";
+import { CourseMaterialType } from "../Entities/CourseMaterial.type";
+import CourseMaterialInputCard from "../components/CourseMaterialInputCard";
 
 const CreateCourse = () => {
   let navitate = useNavigate();
@@ -25,7 +26,11 @@ const CreateCourse = () => {
   const [courseCode, setCourseCode] = useState("");
   const [semester, setSemester] = useState(Global.semesters[0]);
   const [level, setLevel] = useState("");
-  const [materialLinks, setMaterialLinks] = useState<string[]>([]);
+  const [courseMaterials, setCourseMaterials] = useState<CourseMaterialType[]>(
+    []
+  );
+
+  const [passName, setPassName] = useState("");
 
   const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
 
@@ -50,10 +55,10 @@ const CreateCourse = () => {
     const dto = {
       title: courseTitle,
       code: courseCode,
-      materialLinks: materialLinks,
       departmentId: selectedDepartmentId,
       semester: semester,
       level: level,
+      courseMaterials: courseMaterials,
     };
 
     if (
@@ -63,7 +68,6 @@ const CreateCourse = () => {
       semester === "" ||
       level === ""
     ) {
-      console.log("Fill up fields");
       handleSetNotificaton("Fill up all fields");
       return;
       //alert user
@@ -75,7 +79,7 @@ const CreateCourse = () => {
 
     fetch(Global.base_url + Global.course, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", NAME: passName },
       body: JSON.stringify(dto),
     })
       .then(() => {
@@ -113,20 +117,32 @@ const CreateCourse = () => {
         handleSelectChange={handleDepartmentSelectChange}
       />
 
-      <MultiInputCard
-        placeHolder="Link"
-        onListChange={(list) => setMaterialLinks(list)}
-        header="Input Links"
-      />
-
       <Input
         tag="Course Title"
         placeHolder="Title"
         onTextInput={setCourseTitle}
+        maximumLength={64}
       />
-      <Input tag="Course Code" placeHolder="Code" onTextInput={setCourseCode} />
+
+      <Input
+        tag="Course Code"
+        placeHolder="Code"
+        onTextInput={setCourseCode}
+        maximumLength={10}
+      />
+
+      <CourseMaterialInputCard
+        placeHolder1="name"
+        placeHolder2="link"
+        onListChange={(courseMaterials) => setCourseMaterials(courseMaterials)}
+        header="Input course material name link"
+      />
 
       {/* <Input tag="Semester" placeHolder="semester" onTextInput={setSemester} /> */}
+      <br />
+      <label htmlFor="semester" className="form-label">
+        Semester:
+      </label>
       <Selector
         handleSelectChange={(event) => setSemester(event.target.value)}
         items={Global.semesters}
@@ -147,6 +163,7 @@ const CreateCourse = () => {
           onClose={() => handleClearNotification()}
         />
       )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </>
   );
 };

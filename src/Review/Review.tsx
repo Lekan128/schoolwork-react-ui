@@ -9,11 +9,7 @@ import { NotificationType } from "../Entities/Notification.type";
 
 export const Review = () => {
   const params = useParams();
-  console.log(params);
   const courseId = params.courseId;
-  console.log(courseId);
-
-  console.log(Global.base_url + Global.review + "/" + courseId);
 
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [unableToLoadError, setUnableToLoadError] = useState("");
@@ -48,7 +44,6 @@ export const Review = () => {
   };
 
   const handleClearNotification = () => {
-    console.log("Suppose clear am na");
     setNotification("");
     setNotificationType("primary");
   };
