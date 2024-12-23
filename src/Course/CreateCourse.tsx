@@ -30,6 +30,8 @@ const CreateCourse = () => {
     []
   );
 
+  const [passName, setPassName] = useState("");
+
   const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
 
   const selectDptMessage = "Plese select a Department";
@@ -78,7 +80,7 @@ const CreateCourse = () => {
 
     fetch(Global.base_url + Global.course, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", NAME: passName },
       body: JSON.stringify(dto),
     })
       .then(() => {
@@ -162,6 +164,7 @@ const CreateCourse = () => {
           onClose={() => handleClearNotification()}
         />
       )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </>
   );
 };

@@ -7,6 +7,9 @@ import { api } from "../Util/api";
 import Selector from "../components/Selector";
 import { Global } from "../Util/Global";
 import CourseMaterialInputCard from "../components/CourseMaterialInputCard";
+import { NotificationType } from "../Entities/Notification.type";
+import NotificationPopup from "../components/NotificationPopup";
+import Loader from "../components/Loader";
 
 const UpdateCourse = () => {
   const { courseId } = useParams<{ courseId: string }>(); // Get the course ID from the route
@@ -23,6 +26,12 @@ const UpdateCourse = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const [notification, setNotification] = useState("");
+  const [notificationType, setNotificationType] =
+    useState<NotificationType>("primary");
+
+  const [passName, setPassName] = useState("");
+
   // Fetch the existing course details
   useEffect(() => {
     const urlGetCourseById = api.coursesById(courseId!);
@@ -31,8 +40,7 @@ const UpdateCourse = () => {
       .then((response) => {
         if (!response.ok) {
           console.log("An error");
-          //Todo: notification
-          //   throw new Error("Failed to fetch course details.");
+          handleSetNotificaton("Failed to fetch course details.", "danger");
         }
         return response.json();
       })
@@ -68,12 +76,12 @@ const UpdateCourse = () => {
     console.log(urlGetCourseById);
     fetch(urlGetCourseById, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", NAME: passName },
       body: JSON.stringify(updatedCourse),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Failed to update course.");
+          handleSetNotificaton("Failed to update course.", "danger");
         }
         return response.json();
       })
@@ -81,20 +89,67 @@ const UpdateCourse = () => {
         navigate(Global.view + Global.course + "/" + courseId); // Redirect to the course details page
       })
       .catch((err) => {
+        handleSetNotificaton("Error: " + err, "danger");
         setError(err.message);
       });
   };
 
+  const handleSetNotificaton = (
+    notification: string,
+    notificationType: NotificationType = "primary"
+  ) => {
+    setNotification(notification);
+    setNotificationType(notificationType);
+  };
+
+  const handleClearNotification = () => {
+    setNotification("");
+    setNotificationType("primary");
+  };
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <Loader />
+        {notification && (
+          <NotificationPopup
+            message={notification}
+            type={notificationType}
+            onClose={() => handleClearNotification()}
+          />
+        )}
+      </>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <>
+        <div>Error: {error}</div>
+        {notification && (
+          <NotificationPopup
+            message={notification}
+            type={notificationType}
+            onClose={() => handleClearNotification()}
+          />
+        )}
+      </>
+    );
   }
 
   if (!course) {
-    return <div>No course data available.</div>;
+    return (
+      <>
+        <div>No course data available.</div>
+        {notification && (
+          <NotificationPopup
+            message={notification}
+            type={notificationType}
+            onClose={() => handleClearNotification()}
+          />
+        )}
+      </>
+    );
   }
 
   return (
@@ -144,6 +199,15 @@ const UpdateCourse = () => {
       <button className="btn btn-primary" onClick={handleUpdate}>
         Update Course
       </button>
+      {/* notification */}
+      {notification && (
+        <NotificationPopup
+          message={notification}
+          type={notificationType}
+          onClose={() => handleClearNotification()}
+        />
+      )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </div>
   );
 };
