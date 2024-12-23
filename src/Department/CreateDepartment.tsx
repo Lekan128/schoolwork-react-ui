@@ -7,9 +7,11 @@ import MultiInput from "../components/MultiInput";
 import { useNavigate } from "react-router-dom";
 import { NotificationType } from "../Entities/Notification.type";
 import NotificationPopup from "../components/NotificationPopup";
+import Input from "../components/Input";
+import axios from "axios";
 
 const CreateDepartment = () => {
-  let navitate = useNavigate();
+  const navigate = useNavigate();
 
   const [notification, setNotification] = useState("");
   const [notificationType, setNotificationType] =
@@ -18,7 +20,7 @@ const CreateDepartment = () => {
   const [departmentNames, setDepartmentNames] = useState<string[]>([]);
   const [facultyName, setFacultyName] = useState("");
 
-  console.log(facultyName);
+  const [passName, setPassName] = useState("");
 
   const handleSave = () => {
     if (departmentNames.length === 0) {
@@ -29,17 +31,19 @@ const CreateDepartment = () => {
 
     const dto = { departmentNames, facultyName };
 
-    fetch(Global.base_url + Global.department, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dto),
-    })
+    axios
+      .post(Global.base_url + Global.department, dto, {
+        headers: {
+          "Content-Type": "application/json",
+          NAME: passName,
+        },
+      })
       .then(() => {
         console.log("Complete");
-        navitate(Global.create);
+        navigate(Global.create);
       })
       .catch((error) => {
-        handleSetNotificaton("An error occoured: " + error, "danger");
+        handleSetNotificaton("An error occurred: " + error.message, "danger");
         console.log(error);
       });
   };
@@ -81,6 +85,7 @@ const CreateDepartment = () => {
           onClose={() => handleClearNotification()}
         />
       )}
+      <Input placeHolder={"input password"} onTextInput={setPassName} />
     </>
   );
 };
