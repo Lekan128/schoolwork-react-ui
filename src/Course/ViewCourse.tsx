@@ -24,7 +24,6 @@ const ViewCourse = () => {
     fetch(urlGetCourseById)
       .then((response) => {
         if (!response.ok) {
-          console.log("Sorry, to fetch course details.");
           handleSetNotificaton(
             "Sorry, I am unable to fetch course details.",
             "danger"
