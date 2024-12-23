@@ -21,7 +21,9 @@ const CourseSelect = ({
       return;
     }
 
-    fetch(Global.base_url + Global.course + "/" + departmentId)
+    fetch(
+      Global.base_url + Global.course + Global.department + "/" + departmentId
+    )
       .then((response) => response.json())
       .then((response) => setAvailableCourses(response))
       .catch((err) => {
