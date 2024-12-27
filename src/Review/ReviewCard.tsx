@@ -1,5 +1,6 @@
 import React from "react";
 import { ReviewType } from "../Entities/Review.type";
+import FormattedText from "../components/FormattedText";
 
 interface ReviewCardProps {
   review: ReviewType;
@@ -20,15 +21,9 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
       <h5 style={{ marginBottom: "10px", color: "#007bff" }}>
         Lecturer: {review.lecturer}
       </h5>
-      <p style={{ marginBottom: "8px" }}>
-        <strong>Review:</strong> {review.review}
-      </p>
-      <p style={{ marginBottom: "8px" }}>
-        <strong>Test Tips:</strong> {review.testTips}
-      </p>
-      <p>
-        <strong>Exam Tips:</strong> {review.examTips}
-      </p>
+      <FormattedText label="Review" text={review.review} />
+      <FormattedText label="Test Tips" text={review.testTips} />
+      <FormattedText label="Exam Tips" text={review.examTips} />
     </div>
   );
 };
