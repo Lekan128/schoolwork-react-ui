@@ -56,13 +56,15 @@ const Course = () => {
 
   return (
     <div>
-      <h1>{"Courses in the department: " + departmentName}</h1>
+      <h1 className="list-header">
+        {"Courses List (" + departmentName + " Department)"}
+      </h1>
 
       <ul className="list-group">
         {courses.length > 0 ? ( //if faculty is not empty
           courses.map((course: CourseType) => (
             <li
-              className="list-group-item"
+              className="list-group-item list-group-item-action"
               key={course.id}
               onClick={() =>
                 navigate(Global.view + Global.course + "/" + course.id)

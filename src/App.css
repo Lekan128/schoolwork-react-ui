@@ -41,6 +41,51 @@
   color: #888;
 } */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;600;800&family=Koulen&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Sansita+Swashed:wght@700&display=swap"); 
+/*   
+font-family: "Inter", serif;
+  font-family: "Koulen", serif;
+  font-family: "Sansita Swashed", serif;
+  font-family: "Roboto Flex", serif;
+ */
+body, html{
+  background-image: url("background.jpg");
+   /* Full height */
+   height: 100%;
+
+   /* Center and scale the image nicely */
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+  /* background-color: aqua; */
+}
+
+p{
+  font-family: "Roboto Flex", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: bold;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+
+li{
+  border-radius: 12px;
+  margin: 5px;
+  font-family: "Roboto Flex", serif;
+  font-optical-sizing: auto;
+}
+
 input{
   display: inline;
 }
@@ -73,4 +118,103 @@ input{
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.floating_text_holder_container{
+  display: "block"; 
+  height: "100px";
+  padding-top: 40px;
+}
+
+.floating_text_holder{
+  display: flex;
+  justify-content: center;
+}
+
+.floating_image{
+  width: 40%;
+  aspect-ratio: 1;
+  background-image: url("circle.png");
+  position: absolute;
+  /* Full height */
+  height: 25%;
+  top: 65px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media only screen and (max-width: 440px) {
+  body {
+    background-color: lightblue;
+  }
+
+  .floating_image{
+    width: 58%;
+    aspect-ratio: 1;
+    background-image: url("circle.png");
+    position: absolute;
+    /* Full height */
+    height: 36%;
+    top: 15px;
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+@media only screen and ( min-width: 440px ) and ( max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+
+  .floating_image{
+    width: 45%;
+    aspect-ratio: 1;
+    background-image: url("circle.png");
+    position: absolute;
+    /* Full height */
+    height: 36%;
+    top: 15px;
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.sansita-swashed {
+  font-family: "Sansita Swashed", serif;
+  font-size: 2.6em;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-flex {
+  font-family: "Roboto Flex", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "XOPQ" 96,
+    "XTRA" 468,
+    "YOPQ" 79,
+    "YTAS" 750,
+    "YTDE" -203,
+    "YTFI" 738,
+    "YTLC" 514,
+    "YTUC" 712;
+}
+
+.list-header {
+  font-family: "Koulen", serif;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-top: 2rem;
 }

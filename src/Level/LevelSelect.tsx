@@ -36,7 +36,7 @@ const LevelSelect = ({ defaultSelectedMessage, handleSelectChange }: Props) => {
             {defaultSelectedMessage}
           </option>
           {availableLevels.map((level: LevelType) => (
-            <option value={level.name} key={level.id}>
+            <option value={level.id} key={level.id}>
               {level.name}
             </option>
           ))}
