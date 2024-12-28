@@ -66,13 +66,15 @@ const Department = () => {
 
   return (
     <div>
-      <h1>{"Departments in faculty: " + facultyName}</h1>
+      <h1 className="list-header">
+        {"Department List (" + facultyName + " faculty)"}
+      </h1>
 
       <ul className="list-group">
         {Departments.length > 0 ? ( //if faculty is not empty
           Departments.map((department: DepartmentType) => (
             <li
-              className="list-group-item"
+              className="list-group-item list-group-item-action"
               key={department.id}
               onClick={() =>
                 handleOnItemSelected(

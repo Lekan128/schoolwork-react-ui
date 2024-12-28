@@ -45,11 +45,12 @@ const Faculty = () => {
 
   return (
     <div>
+      <h1 className="list-header">Faculty List</h1>
       <ul className="list-group">
         {faculties.length > 0 ? ( //if faculty is not empty
           faculties.map((faculty: FacultyType) => (
             <li
-              className="list-group-item"
+              className="list-group-item list-group-item-action"
               key={faculty.id}
               onClick={() => {
                 navitate("department", { state: faculty.name });
