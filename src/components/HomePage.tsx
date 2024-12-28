@@ -14,8 +14,27 @@ const HomePage = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "2rem" }}>
-      <h1>Welcome to the Academic Portal</h1>
-      <p>Explore faculties and departments to find the information you need.</p>
+      <h1 className="roboto-flex">Get to know your</h1>
+
+      <div className="floating_text_holder_container">
+        <div className="floating_text_holder">
+          <h1 className="sansita-swashed">COURSES</h1>
+
+          <div className="floating_image"></div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <SearchCourse />
+      <br />
+      <br />
+      <br />
+
+      <p>
+        You can also explore faculties and departments to find the information
+        you need.
+      </p>
       <button
         onClick={handleFacultiesClick}
         style={{
@@ -30,13 +49,6 @@ const HomePage = () => {
       >
         Go to Faculties
       </button>
-
-      <br />
-      <br />
-      <br />
-      <div className="card">
-        <SearchCourse />
-      </div>
 
       {/* Hidden or less obvious "Create" option */}
       <div

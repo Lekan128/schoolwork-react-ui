@@ -35,21 +35,27 @@ const SearchCourse = () => {
 
     const params = new URLSearchParams();
     if (searchQuery) params.append("search", searchQuery);
-    if (departmentId) params.append("departmentId", departmentId);
-    if (facultyName) params.append("facultyName", facultyName);
-    if (semester) params.append("semester", semester);
-    if (level) params.append("levelId", level);
+
+    if (showAdvanced) {
+      if (departmentId) params.append("departmentId", departmentId);
+      if (facultyName) params.append("facultyName", facultyName);
+      if (semester) params.append("semester", semester);
+      if (level) params.append("levelId", level);
+    }
+
+    console.log(api.courses() + "?" + params.toString());
 
     fetch(api.courses() + "?" + params.toString())
       .then((response) => {
         if (!response.ok) {
-          handleSetNotificaton("Failed to fetch courses");
+          handleSetNotificaton("Failed to fetch courses", "warning");
           setError("Failed to fetch courses");
           // throw new Error("Failed to fetch courses");
         }
         return response.json();
       })
       .then((data: CourseType[]) => {
+        if (data.length === 0) setError("No course found");
         setCourses(data);
         setLoading(false);
       })
@@ -73,6 +79,22 @@ const SearchCourse = () => {
     setNotificationType("primary");
   };
 
+  const handleShowAdvanceSearchToggle = () => {
+    setFacultyName("");
+    setDepartmentId("");
+    setLevel("");
+
+    if (showAdvanced) {
+      //already showing advanceOption, ie about to hide
+      setSemester("");
+    } else {
+      //about to show semester
+      setSemester("FIRST");
+    }
+
+    setShowAdvanced(!showAdvanced);
+  };
+
   return (
     <div className="container">
       <h2>Search Courses</h2>
@@ -83,6 +105,9 @@ const SearchCourse = () => {
           placeholder="Search by course title or code..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDownCapture={(event) => {
+            if (event.key === "Enter") handleSearch();
+          }}
         />
         <button className="btn btn-primary" onClick={handleSearch}>
           Search
@@ -100,7 +125,7 @@ const SearchCourse = () => {
             ? { color: "blue", textAlign: "end" }
             : { color: "grey", textAlign: "end" }),
         }}
-        onClick={() => setShowAdvanced(!showAdvanced)}
+        onClick={handleShowAdvanceSearchToggle}
       >
         Advanced search
       </h6>
@@ -166,19 +191,18 @@ const SearchCourse = () => {
       {error && <p className="text-danger">{error}</p>}
 
       <ul className="list-group">
-        {courses.length > 0
-          ? courses.map((course: CourseType) => (
-              <li
-                key={course.id}
-                className="list-group-item"
-                onClick={() =>
-                  navigate(Global.view + Global.course + "/" + course.id)
-                }
-              >
-                <strong>{course.code}</strong>: {course.title}
-              </li>
-            ))
-          : !loading && <p>No courses found.</p>}
+        {courses.length > 0 &&
+          courses.map((course: CourseType) => (
+            <li
+              key={course.id}
+              className="list-group-item"
+              onClick={() =>
+                navigate(Global.view + Global.course + "/" + course.id)
+              }
+            >
+              <strong>{course.code}</strong>: {course.title}
+            </li>
+          ))}
       </ul>
 
       {notification.length > 0 && (
